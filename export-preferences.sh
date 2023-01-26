@@ -61,8 +61,7 @@ function check_omzsh()
 
    if [[ ! -d ~/.oh-my-zsh ]]; then
       echo "Oh My Zsh is not installed ! Installing now..."
-      local omzsh_installer="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
-      sh -c $(curl fsSL $omzsh_installer)
+      sh -c $(curl fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
    else
       echo "Oh My Zsh is installed !"
    fi
