@@ -31,7 +31,11 @@ function install_fish()
                 echo "APT detected."
                 if [[ $debug == false ]]; then
                     sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish || { echo "Errors occured during installation. Aborting"; exit 1; }
-                    FISH_PATH=/usr/local/bin/fish
+                    if [[ -f /usr/local/bin/fish ]]; then
+                        FISH_PATH=/usr/local/bin/fish
+                    else
+                        FISH_PATH=/usr/bin/fish
+                    fi
                 fi
             else
                 echo "Idk other distributions yet"
