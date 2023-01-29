@@ -34,7 +34,7 @@ function greet_me
     echo "Good $(get_greet_time) $USER, $formula"
 end
 
-# ...and saying goodbye
+# ...and saying goodbye as well
 function goodbye_me
     echo "All seem to have completed successfully. Have a nice day."
 end
