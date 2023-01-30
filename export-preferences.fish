@@ -73,14 +73,6 @@ function check_fish_plugins
         end
     end
 
-    if [ ! (fisher list | grep decors/fish-source-highlight) ]
-        echo -n "fish-source-highlight is not installed. Installing now... "
-
-        if [ $debug = false ]
-            fisher install decors/fish-source-highlight
-        end
-    end
-
     echo "Everything is installed !"
 end
 
