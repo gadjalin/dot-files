@@ -27,7 +27,7 @@ The following operations are performed:
   * CMake, GCC/LLVM/build-essential, Go, OpenJDK, autojump, exa, fortune, cowsay, curl, nodejs, python3, npm
 * Install [Fish](https://fishshell.com) and [Fisher](https://github.com/jorgebucaran/fisher) (for plugins)
 * Install Tide and other plugins:
-  * [decors/fish-source-highlight](https://github.com/decors/fish-source-highlight)
+  * None now
 * Export config.fish to ~/.config/fish/
 * Check vim version and enabled features
 * Install vim plugins
