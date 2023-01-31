@@ -27,13 +27,26 @@ function install_fish()
         fi
     elif [[ $OSTYPE == "linux-gnu" ]]; then
         if [[ -f /etc/lsb-release ]]; then
-            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//')
+            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//' -e 's/"//g"')
 
             if [[ $distrib == "Ubuntu" ]]; then
                 echo -n "APT detected... "
 
                 if [[ $debug == false ]]; then
-                    sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish || { echo "Errors occured during installation. Aborting"; exit 1; }
+                    sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish || { echo "Errors occured during installation. Aborting."; exit 1; }
+                    if [[ -f /usr/local/bin/fish ]]; then
+                        FISH_PATH=/usr/local/bin/fish
+                    else
+                        FISH_PATH=/usr/bin/fish
+                    fi
+                fi
+
+                echo "Fish installed !"
+            elif [[ $destrib == "Arch" ]]; then
+                echo -n "Pacman detected... "
+                
+                if [[ $debug == false ]]; then
+                    sudo pacman -Sy fish || { echo "Errors occured during installation. Aborting."; exit 1; }
                     if [[ -f /usr/local/bin/fish ]]; then
                         FISH_PATH=/usr/local/bin/fish
                     else
@@ -88,7 +101,7 @@ function check_prerequisites()
         fi
     elif [[ $OSTYPE == "linux-gnu" ]]; then
         if [[ -f /etc/lsb-release ]]; then
-            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//')
+            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//' -e 's/"//g')
 
             if [[ $distrib == "Ubuntu" ]]; then
                 echo -n "APT detected... "
@@ -96,6 +109,15 @@ function check_prerequisites()
                 if [[ $debug == false ]]; then
                     # TODO check autojump + vim >9.0 on ppa currently
                     sudo apt update && sudo apt install build-essential cmake golang-go openjdk-17-jre openjdk-17-jdk exa fortune cowsay nodejs npm python3 python3-dev || { echo "Errors occured during installation. Aborting"; exit 1; }
+                fi
+
+                echo "Dependencies installed !"
+            elif [[ $distrib == "Arch" ]]; then
+                echo -n "Pacman detected... "
+
+                if [[ $debug == false ]]; then
+                    # TODO check autojump from the AUR
+                    sudo pacman -Sy base-devel cmake jre-openjdk jdk-openjdk go exa fortune-mod cowsay nodejs npm python || { echo "Errors occured during installation. Aborting"; exit 1; }
                 fi
 
                 echo "Dependencies installed !"
