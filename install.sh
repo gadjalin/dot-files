@@ -27,7 +27,7 @@ function install_fish()
         fi
     elif [[ $OSTYPE == "linux-gnu" ]]; then
         if [[ -f /etc/lsb-release ]]; then
-            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//' -e 's/"//g"')
+            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//' -e 's/"//g')
 
             if [[ $distrib == "Ubuntu" ]]; then
                 echo -n "APT detected... "
@@ -42,7 +42,7 @@ function install_fish()
                 fi
 
                 echo "Fish installed !"
-            elif [[ $destrib == "Arch" ]]; then
+            elif [[ $distrib == "Arch" ]]; then
                 echo -n "Pacman detected... "
                 
                 if [[ $debug == false ]]; then
