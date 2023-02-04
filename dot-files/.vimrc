@@ -130,6 +130,11 @@ else
     vmap <Leader>k <Plug>MoveBlockUp
     vmap <Leader>j <Plug>MoveBlockDown
     vmap <Leader>l <Plug>MoveBlockRight
+
+    execute "set <Home>=OH"
+    execute "set <End>=OF"
+    map <Home> 0
+    map <End> $
 endif
 
 let g:ycm_always_populate_location_list = 1
