@@ -7,7 +7,6 @@ set mouse=a
 set hidden
 
 set number
-"set cursorline
 set nowrap
 
 set showmode
@@ -22,7 +21,7 @@ set colorcolumn=
 set wildmenu
 set wildmode=list:longest
 
-set listchars=tab:≫\ ,space:·,eol:¬
+set listchars=tab:→\ ,space:·,eol:¬
 set list
 
 set sw=4 sts=4 ts=4 expandtab
@@ -34,13 +33,6 @@ set whichwrap+=h,l
 
 set termwinsize=12x0
 set splitbelow
-
-syntax on
-set t_Co=256
-set background=dark
-colorscheme cyberpunk-neon
-"let g:rehash256=1
-set termguicolors
 
 filetype off
 
@@ -77,20 +69,25 @@ call vundle#begin()
     Plugin 'ycm-core/YouCompleteMe'
     Plugin 'puremourning/vimspector'
 
+    "Plugin 'morhetz/gruvbox'
+
 call vundle#end()
 
 filetype plugin indent on
+
+"let g:gruvbox_italic='1'
+"let g:gruvbox_transparent_bg='1'
+
+syntax on
+set background=dark
+colorscheme cyberpunk-neon
+set termguicolors
 
 set laststatus=2
 
 let NERDTreeShowLineNumbers=0
 let NERDTreeWinPos="left"
 let NERDTreeWinSize=30
-
-"let g:buffet_powerline_separators = 1
-"let g:buffet_tab_icon = "\uf00a"
-"let g:buffet_left_trunc_icon = "\uf0a8"
-"let g:buffet_right_trunc_icon = "\uf0a9"
 
 au! BufEnter *.cpp let b:fswitchdst='hpp,h'
 au! BufEnter *.h let b:fswitchdst='cpp,c'
@@ -113,9 +110,17 @@ if has('macunix')
     vmap º <Plug>MoveBlockDown
     vmap ¬ <Plug>MoveBlockRight
 else
+    " Took me a while to figure out why my terminal wouldn't let me use the Alt key
+    " I used 'sed -n l' to find out what char my terminal (tilix) was sending
+    execute "set <M-o>=o"
+    execute "set <M-O>=O"
     nnoremap <Leader>o o<Esc>0"_D
     nnoremap <Leader>O O<Esc>0"_D
 
+    execute "set <M-h>=h"
+    execute "set <M-k>=k"
+    execute "set <M-j>=j"
+    execute "set <M-l>=l"
     nmap <Leader>h <Plug>MoveLineLeft
     nmap <Leader>k <Plug>MoveLineUp
     nmap <Leader>j <Plug>MoveLineDown
