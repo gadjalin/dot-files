@@ -145,4 +145,5 @@ let g:ycm_clangd_args = ['--header-insertion=never']
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd BufLeave * if &buftype=="terminal" | setlocal nobuflisted | endif
 
