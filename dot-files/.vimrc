@@ -1,109 +1,152 @@
-set encoding=utf8
+set encoding=utf-8
+scriptencoding utf-8
 
-set exrc
-set secure
 set nocompatible
-set mouse=a
-set hidden
 
-set number
-set nowrap
-
-set showmode
-set showcmd
-
-set hlsearch
-set incsearch
-set showmatch
-
-set colorcolumn=
-
-set wildmenu
-set wildmode=list:longest
-
-set listchars=tab:→\ ,space:·,eol:¬
-set list
-
-set sw=4 sts=4 ts=4 expandtab
-set autoindent
-set smartindent
-
-set backspace=indent,eol,start
-set whichwrap+=h,l
-
-set termwinsize=12x0
-set splitbelow
-
+" Plugins
 filetype off
-
-let g:polyglot_disabled = ['fish']
-
-if &shell =~# 'fish$'
-    set shell=sh
-endif
-
 set rtp+=~/.vim/bundle/Vundle.vim
-
 call vundle#begin()
-
     Plugin 'VundleVim/Vundle.vim'
 
-    Plugin 'ryanoasis/vim-devicons'
-    Plugin 'sheerun/vim-polyglot'
+    " Display
     Plugin 'khaveesh/vim-fish-syntax'
-    Plugin 'bfrg/vim-cpp-modern'
+    Plugin 'Yggdroot/indentLine'
 
+    " Behaviour
     Bundle 'matze/vim-move'
-    Plugin 'derekwyatt/vim-fswitch'
-    Plugin 'qpkorr/vim-bufkill'
-
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'tpope/vim-surround'
+    " Move to fzf ?
+    Plugin 'https://github.com/ctrlpvim/ctrlp.vim'
 
-    Plugin 'Yggdroot/indentLine'
-    Plugin 'powerline/powerline',{'rtp':'powerline/bindings/vim/'}
-
-    Plugin 'preservim/nerdtree'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
-
+    " Completion and Debug
     Plugin 'ycm-core/YouCompleteMe'
     Plugin 'puremourning/vimspector'
 
-    "Plugin 'morhetz/gruvbox'
+    " Load as very last one
+    Plugin 'ryanoasis/vim-devicons'
 
+    "Plugin 'morhetz/gruvbox'
 call vundle#end()
 
-filetype plugin indent on
+" Plugins/YCM
+let g:ycm_always_populate_location_list = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
+let g:ycm_clangd_args = ['--header-insertion=never']
 
+" Plugins/vim-cpp-modern
+let g:cpp_function_highlight = 1
+let g:cpp_attribute_highlight = 1
+let g:cpp_member_highlight = 1
+"let g:cpp_simple_highlight = 1
+
+" Plugins/CtrlP
+let g:ctrlp_show_hidden = 1
+
+" Plugins/gruvbox
 "let g:gruvbox_italic='1'
 "let g:gruvbox_transparent_bg='1'
 
-syntax on
-set background=dark
-colorscheme cyberpunk-neon
-set termguicolors
+" Indentation
+set sw=4 sts=4 ts=4 expandtab
+set nosmartindent
+set cindent noautoindent
+set cinoptions=l1,g0
 
+set backspace=indent,eol,start
+set whichwrap+=h,l
+set completeopt=menu,preview
+set clipboard=
+
+" Search
+set hlsearch
+set incsearch
+set smartcase ignorecase
+
+" Window
+set splitbelow splitright
+set termwinsize=12x0
+
+autocmd TerminalWinOpen *
+    \ if &buftype == 'terminal' |
+    \     setlocal nobuflisted |
+    \     setlocal nowrap |
+    \     set wfh |
+    \ endif
+
+" Behaviour
+set mouse=a
+set nohidden
+set nowrap
+set sidescroll=5
+set scrolloff=1
+set showmatch
+set nostartofline
+set nojoinspaces
+set wildmenu
+set wildmode=list:longest
+
+" Display
+set relativenumber
+set numberwidth=3
+set ruler
+set showmode
+set showcmd
+set colorcolumn=100
 set laststatus=2
 
-let NERDTreeShowLineNumbers=0
-let NERDTreeWinPos="left"
-let NERDTreeWinSize=30
+set list
+set listchars=tab:→\ ,space:·,eol:¬
 
-au! BufEnter *.cpp let b:fswitchdst='hpp,h'
-au! BufEnter *.h let b:fswitchdst='cpp,c'
-au! BufEnter *.hpp let b:fswitchdst='cpp'
+set shortmess=a
+set statusline=\ %<%f\ %y%m%r%=%(%l/%L,%c%)
 
-noremap <Tab> :bn<CR>
-noremap <S-Tab> :bp<CR>
+set background=dark
+set termguicolors
+set t_Co=256
+colorscheme cyberpunk-neon
+
+" Terminal title set to file name
+set title
+set titlestring=%t
+set titleold=
+
+" Don't timeout incomplete commands
+set notimeout ttimeout ttimeoutlen=0
+
+" Syntax highlighting
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
+
+" Shortcuts
+map <Tab> :bn<CR>
+map <S-Tab> :bp<CR>
 
 if has('macunix')
-    nnoremap ø o<Esc>0"_D
-    nnoremap Ø O<Esc>0"_D
+    " <Leader>o
+    nmap ø o<Esc>0"_D
+    " <Leader>O
+    nmap Ø O<Esc>0"_D
 
-    nmap ª <Plug>MoveLineLeft
+    " <Leader>s
+    nmap ß <Esc>:w<CR>
+    " <Leader>w
+    nmap ∑ <Esc>:bd!<CR>
+
+    " <Leader>h
+    nmap ª :tabp<CR>
+    " <Leader>l
+    nmap ¬ :tabn<CR>
+
+    " <Leader>k
     nmap ∆ <Plug>MoveLineUp
+    " <Leader>j
     nmap º <Plug>MoveLineDown
-    nmap ¬ <Plug>MoveLineRight
 
     vmap ª <Plug>MoveBlockLeft
     vmap ∆ <Plug>MoveBlockUp
@@ -114,22 +157,27 @@ else
     " I used 'sed -n l' to find out what char my terminal (tilix) was sending
     execute "set <M-o>=o"
     execute "set <M-O>=O"
-    nnoremap <Leader>o o<Esc>0"_D
-    nnoremap <Leader>O O<Esc>0"_D
+    execute "set <M-s>=s"
+    execute "set <M-w>=w"
+    nmap <Leader>o o<Esc>0"_D
+    nmap <Leader>O O<Esc>0"_D
+    nmap <Leader>s <Esc>:w<CR>
+    nmap <Leader>w <Esc>:bd!<CR>
 
     execute "set <M-h>=h"
     execute "set <M-k>=k"
     execute "set <M-j>=j"
     execute "set <M-l>=l"
-    nmap <Leader>h <Plug>MoveLineLeft
+    nmap <Leader>h :tabp<CR>
+    nmap <Leader>l :tabn<CR>
+
     nmap <Leader>k <Plug>MoveLineUp
     nmap <Leader>j <Plug>MoveLineDown
-    nmap <Leader>l <Plug>MoveLineRight
 
     vmap <Leader>h <Plug>MoveBlockLeft
+    vmap <Leader>l <Plug>MoveBlockRight
     vmap <Leader>k <Plug>MoveBlockUp
     vmap <Leader>j <Plug>MoveBlockDown
-    vmap <Leader>l <Plug>MoveBlockRight
 
     execute "set <Home>=OH"
     execute "set <End>=OF"
@@ -137,13 +185,6 @@ else
     map <End> $
 endif
 
-let g:ycm_always_populate_location_list = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
-let g:ycm_clangd_args = ['--header-insertion=never']
-
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd BufLeave * if &buftype=="terminal" | setlocal nobuflisted | endif
+" Apparently this has to be at the end
+set exrc secure
 

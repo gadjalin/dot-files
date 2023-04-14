@@ -143,19 +143,16 @@ function check_vim_plugins
         end
     end
 
-    echo "VIM plugins are installed and ready to go !"
-end
+    if [ ! -d ~/.vim/pack/plugins/start/vim-cpp-modern]
+        echo -n "vim-cpp-modern was not detected. Installing now... "
 
-function configure_vim
-    echo -n "Now configuring VIM... "
-
-    # TODO :PluginInstall plugins and build YCM
-    if [ $debug = false ]
-        vim -u ./dot-files/.viminit +PluginInstall +qall
+        if [ $debug = false ]
+            mkdir -p $HOME/.vim/pack/plugins/start
+            git clone --depth=1 https://github.com/bfrg/vim-cpp-modern.git $HOME/.vim/pack/plugins/start/vim-cpp-modern
+        end
     end
 
-    echo "VIM configured"
-    echo "/!\ Remember to build YCM with 'cd ~/.vim/bundle/YouCompleteMe && python3 install.py --all'"
+    echo "VIM plugins are installed and ready to go !"
 end
 
 function export_vimrc
@@ -163,9 +160,24 @@ function export_vimrc
 
     if [ $debug = false ]
         cp {./dot-files,$HOME}/.vimrc
+        mkdir -p $HOME/.vim/colors
+        cp {./dot-files,$HOME/.vim}/init.vim
+        cp {./dot-files,$HOME/.vim/colors}/cyberpunk-neon.vim
     end
 
     echo "Exported."
+end
+
+function configure_vim
+    echo -n "Now configuring VIM... "
+
+    if [ $debug = false ]
+        vim -u $HOME/.vimrc +PluginInstall +qall
+    end
+
+    # TODO: build YCM
+    echo "VIM configured"
+    echo "/!\ Remember to build YCM with 'cd ~/.vim/bundle/YouCompleteMe && python3 install.py --all'"
 end
 
 greet_me
@@ -178,8 +190,8 @@ export_fishrc
 check_vim
 check_vim_features
 check_vim_plugins
-configure_vim
 export_vimrc
+configure_vim
 
 goodbye_me
 
