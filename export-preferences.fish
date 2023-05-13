@@ -143,7 +143,7 @@ function check_vim_plugins
         end
     end
 
-    if [ ! -d ~/.vim/pack/plugins/start/vim-cpp-modern]
+    if [ ! -d ~/.vim/pack/plugins/start/vim-cpp-modern ]
         echo -n "vim-cpp-modern was not detected. Installing now... "
 
         if [ $debug = false ]

@@ -24,10 +24,10 @@ call vundle#begin()
     Plugin 'ycm-core/YouCompleteMe'
     Plugin 'puremourning/vimspector'
 
+    "Plugin 'morhetz/gruvbox'
+
     " Load as very last one
     Plugin 'ryanoasis/vim-devicons'
-
-    "Plugin 'morhetz/gruvbox'
 call vundle#end()
 
 " Plugins/YCM
@@ -123,6 +123,10 @@ filetype on
 filetype indent on
 filetype plugin on
 
+" Must come after filetype
+set tw=79
+set fo=crlj
+
 " Shortcuts
 map <Tab> :bn<CR>
 map <S-Tab> :bp<CR>
@@ -153,34 +157,35 @@ if has('macunix')
     vmap º <Plug>MoveBlockDown
     vmap ¬ <Plug>MoveBlockRight
 else
+    " Update May 2023: Weird things going on with Gnome 44 and keymapping,
+    " generating accentuated characters
     " Took me a while to figure out why my terminal wouldn't let me use the Alt key
     " I used 'sed -n l' to find out what char my terminal (tilix) was sending
-    execute "set <M-o>=o"
-    execute "set <M-O>=O"
-    execute "set <M-s>=s"
-    execute "set <M-w>=w"
-    nmap <Leader>o o<Esc>0"_D
-    nmap <Leader>O O<Esc>0"_D
-    nmap <Leader>s <Esc>:w<CR>
-    nmap <Leader>w <Esc>:bd!<CR>
+    execute "set <A-o>=o"
+"    execute "set <A-O>=O"
+    execute "set <A-s>=s"
+    execute "set <A-w>=w"
+    nmap ï o<Esc>0"_D
+"    nmap <A-O> O<Esc>0"_D
+    nmap ó :w<CR>
+    nmap ÷ :bd<CR>
+    execute "set <A-h>=h"
+    execute "set <A-k>=k"
+    execute "set <A-j>=j"
+    execute "set <A-l>=l"
+    nmap è :tabp<CR>
+    nmap ì :tabn<CR>
 
-    execute "set <M-h>=h"
-    execute "set <M-k>=k"
-    execute "set <M-j>=j"
-    execute "set <M-l>=l"
-    nmap <Leader>h :tabp<CR>
-    nmap <Leader>l :tabn<CR>
+    nmap ë <Plug>MoveLineUp
+    nmap ê <Plug>MoveLineDown
 
-    nmap <Leader>k <Plug>MoveLineUp
-    nmap <Leader>j <Plug>MoveLineDown
+    vmap <A-h> <Plug>MoveBlockLeft
+    vmap <A-l> <Plug>MoveBlockRight
+    vmap <A-k> <Plug>MoveBlockUp
+    vmap <A-j> <Plug>MoveBlockDown
 
-    vmap <Leader>h <Plug>MoveBlockLeft
-    vmap <Leader>l <Plug>MoveBlockRight
-    vmap <Leader>k <Plug>MoveBlockUp
-    vmap <Leader>j <Plug>MoveBlockDown
-
-    execute "set <Home>=OH"
-    execute "set <End>=OF"
+"    execute "set <Home>=OH"
+"    execute "set <End>=OF"
     map <Home> 0
     map <End> $
 endif
