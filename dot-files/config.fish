@@ -1,17 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-
-    # Startup command
-    fortune | cowsay
-
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    if test -f /home/gad/anaconda3/bin/conda
-        eval /home/gad/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-    end
-    # <<< conda initialize <<<
-end
-
 # Suppress fish welcome message
 set -U fish_greeting
 
@@ -62,4 +48,18 @@ set -g tide_right_prompt_items cmd_duration jobs time virtual_env
 alias ll='exa -lrF --header --icons'
 alias la='exa -lrFa --header --icons'
 alias myip='curl http://ipecho.net/plain; echo'
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+
+    # Startup command
+    fortune | cowsay
+
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    if test -f /home/gad/anaconda3/bin/conda
+        eval /home/gad/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+    end
+    # <<< conda initialize <<<
+end
 
