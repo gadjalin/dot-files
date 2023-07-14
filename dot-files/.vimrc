@@ -17,14 +17,13 @@ call vundle#begin()
     Bundle 'matze/vim-move'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'tpope/vim-surround'
-    " Move to fzf ?
     Plugin 'https://github.com/ctrlpvim/ctrlp.vim'
 
     " Completion and Debug
     Plugin 'ycm-core/YouCompleteMe'
     Plugin 'puremourning/vimspector'
 
-    "Plugin 'morhetz/gruvbox'
+    Plugin 'morhetz/gruvbox'
 
     " Load as very last one
     Plugin 'ryanoasis/vim-devicons'
@@ -37,7 +36,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
 let g:ycm_clangd_args = ['--header-insertion=never']
 
-" Plugins/vim-cpp-modern
+" Plugins/vim-cpp-modern (Installed separately from Vundle)
 let g:cpp_function_highlight = 1
 let g:cpp_attribute_highlight = 1
 let g:cpp_member_highlight = 1
@@ -47,8 +46,8 @@ let g:cpp_member_highlight = 1
 let g:ctrlp_show_hidden = 1
 
 " Plugins/gruvbox
-"let g:gruvbox_italic='1'
-"let g:gruvbox_transparent_bg='1'
+let g:gruvbox_italic='1'
+let g:gruvbox_transparent_bg='1'
 
 " Indentation
 set sw=4 sts=4 ts=4 expandtab
@@ -70,6 +69,8 @@ set smartcase ignorecase
 set splitbelow splitright
 set termwinsize=12x0
 
+" Makes terminal not appear in the buffer list
+" So that I don't have to worry when I cycle through buffers
 autocmd TerminalWinOpen *
     \ if &buftype == 'terminal' |
     \     setlocal nobuflisted |
@@ -107,7 +108,7 @@ set statusline=\ %<%f\ %y%m%r%=%(%l/%L,%c%)
 set background=dark
 set termguicolors
 set t_Co=256
-colorscheme cyberpunk-neon
+colorscheme gruvbox
 
 " Terminal title set to file name
 set title
@@ -140,7 +141,7 @@ if has('macunix')
     " <Leader>s
     nmap ß <Esc>:w<CR>
     " <Leader>w
-    nmap ∑ <Esc>:bd!<CR>
+    nmap ∑ <Esc>:bd<CR>
 
     " <Leader>h
     nmap ª :tabp<CR>
@@ -157,8 +158,10 @@ if has('macunix')
     vmap º <Plug>MoveBlockDown
     vmap ¬ <Plug>MoveBlockRight
 else
-    " Update May 2023: Weird things going on with Gnome 44 and keymapping,
-    " generating accentuated characters
+    " FIXME: Update May 2023: Weird things going on with Gnome 44 and keymapping,
+    " generating accentuated characters. It still not working exactly properly
+    " though
+
     " Took me a while to figure out why my terminal wouldn't let me use the Alt key
     " I used 'sed -n l' to find out what char my terminal (tilix) was sending
     execute "set <A-o>=o"
