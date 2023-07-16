@@ -168,27 +168,30 @@ else
 "    execute "set <A-O>=O"
     execute "set <A-s>=s"
     execute "set <A-w>=w"
-    nmap ï o<Esc>0"_D
+    nmap <A-o> o<Esc>0"_D
 "    nmap <A-O> O<Esc>0"_D
-    nmap ó :w<CR>
-    nmap ÷ :bd<CR>
+    nmap <A-s> :w<CR>
+    nmap <A-w> :bd<CR>
     execute "set <A-h>=h"
     execute "set <A-k>=k"
     execute "set <A-j>=j"
     execute "set <A-l>=l"
-    nmap è :tabp<CR>
-    nmap ì :tabn<CR>
 
-    nmap ë <Plug>MoveLineUp
-    nmap ê <Plug>MoveLineDown
+    " This does not work unless .vimrc is sourced again once vim is opened...
+    " WHY !?
+    nnoremap <A-h> :tabp<CR>
+    nnoremap <A-l> :tabn<CR>
+
+    nmap <A-k> <Plug>MoveLineUp
+    nmap <A-j> <Plug>MoveLineDown
 
     vmap <A-h> <Plug>MoveBlockLeft
     vmap <A-l> <Plug>MoveBlockRight
     vmap <A-k> <Plug>MoveBlockUp
     vmap <A-j> <Plug>MoveBlockDown
 
-"    execute "set <Home>=OH"
-"    execute "set <End>=OF"
+    execute "set <Home>=OH"
+    execute "set <End>=OF"
     map <Home> 0
     map <End> $
 endif

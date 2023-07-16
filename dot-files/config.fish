@@ -3,13 +3,6 @@ if status is-interactive
 
     # Startup command
     fortune | cowsay
-
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    if test -f /home/gad/anaconda3/bin/conda
-        eval /home/gad/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-    end
-    # <<< conda initialize <<<
 end
 
 # Suppress fish welcome message
