@@ -129,8 +129,8 @@ set tw=79
 set fo=crlj
 
 " Shortcuts
-nnoremap <Tab> :tabp<CR>
-nnoremap <S-Tab> :tabn<CR>
+nnoremap <Tab> :tabn<CR>
+nnoremap <S-Tab> :tabp<CR>
 
 if has('macunix')
     " <A-o>
