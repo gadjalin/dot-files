@@ -129,34 +129,33 @@ set tw=79
 set fo=crlj
 
 " Shortcuts
-map <Tab> :bn<CR>
-map <S-Tab> :bp<CR>
+nnoremap <Tab> :tabp<CR>
+nnoremap <S-Tab> :tabn<CR>
 
 if has('macunix')
-    " <Leader>o
-    nmap ø o<Esc>0"_D
-    " <Leader>O
-    nmap Ø O<Esc>0"_D
+    " <A-o>
+    nnoremap ø o<Esc>0"_D
+    " <A-O>
+    nnoremap Ø O<Esc>0"_D
 
-    " <Leader>s
-    nmap ß <Esc>:w<CR>
-    " <Leader>w
-    nmap ∑ <Esc>:bd<CR>
+    " <A-s>
+    nnoremap ß <Esc>:w<CR>
+    " <A-w>
+    nnoremap ∑ <Esc>:bd<CR>
 
-    " <Leader>h
-    nmap ª :tabp<CR>
-    " <Leader>l
-    nmap ¬ :tabn<CR>
+    " <A-k>
+    nnoremap ∆ <Plug>MoveLineUp
+    " <A-j>
+    nnoremap º <Plug>MoveLineDown
 
-    " <Leader>k
-    nmap ∆ <Plug>MoveLineUp
-    " <Leader>j
-    nmap º <Plug>MoveLineDown
-
-    vmap ª <Plug>MoveBlockLeft
-    vmap ∆ <Plug>MoveBlockUp
-    vmap º <Plug>MoveBlockDown
-    vmap ¬ <Plug>MoveBlockRight
+    " <A-h>
+    vnoremap ª <Plug>MoveBlockLeft
+    " <A-k>
+    vnoremap ∆ <Plug>MoveBlockUp
+    " <A-j>
+    vnoremap º <Plug>MoveBlockDown
+    " <A-l>
+    vnoremap ¬ <Plug>MoveBlockRight
 else
     " FIXME: Update May 2023: Weird things going on with Gnome 44 and keymapping,
     " generating accentuated characters. It still not working exactly properly
@@ -176,11 +175,6 @@ else
     execute "set <A-k>=k"
     execute "set <A-j>=j"
     execute "set <A-l>=l"
-
-    " This does not work unless .vimrc is sourced again once vim is opened...
-    " WHY !?
-    nnoremap <A-h> :tabp<CR>
-    nnoremap <A-l> :tabn<CR>
 
     nmap <A-k> <Plug>MoveLineUp
     nmap <A-j> <Plug>MoveLineDown
