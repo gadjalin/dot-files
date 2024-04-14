@@ -35,6 +35,16 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
 let g:ycm_clangd_args = ['--header-insertion=never']
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+"
+"let g:ycm_language_server = []
+"let g:ycm_language_server += [
+"    \   { 'name': 'fortran',
+"    \     'filetypes': [ 'fortran' ],
+"    \     'cmdline': [ 'fortls', '--notify_init', '--hover_signature', '--hover_language', 'fortran', '--use_signature_help', '--lowercase_intrinsics' ],
+"    \   },
+"    \ ]
 
 " Plugins/vim-cpp-modern (Installed separately from Vundle)
 let g:cpp_function_highlight = 1
