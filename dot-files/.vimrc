@@ -35,16 +35,17 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
 let g:ycm_clangd_args = ['--header-insertion=never']
-"let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 0
 "let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-"
-"let g:ycm_language_server = []
-"let g:ycm_language_server += [
-"    \   { 'name': 'fortran',
-"    \     'filetypes': [ 'fortran' ],
-"    \     'cmdline': [ 'fortls', '--notify_init', '--hover_signature', '--hover_language', 'fortran', '--use_signature_help', '--lowercase_intrinsics' ],
-"    \   },
-"    \ ]
+
+let g:ycm_language_server = []
+let g:ycm_language_server =
+    \ [
+    \   { 'name': 'fortls',
+    \     'cmdline': [ 'fortls', '--hover_language', 'fortran95', '--notify_init', '--hover_signature', '--use_signature_help', '--lowercase_intrinsics' ],
+    \     'filetypes': [ 'fortran' ]
+    \   },
+    \ ]
 
 " Plugins/vim-cpp-modern (Installed separately from Vundle)
 let g:cpp_function_highlight = 1
@@ -144,28 +145,23 @@ nnoremap <S-Tab> :tabp<CR>
 
 if has('macunix')
     " <A-o>
-    nnoremap ø o<Esc>0"_D
+    "nnoremap ø o<Esc>0"_D
     " <A-O>
-    nnoremap Ø O<Esc>0"_D
-
-    " <A-s>
-    nnoremap ß <Esc>:w<CR>
-    " <A-w>
-    nnoremap ∑ <Esc>:bd<CR>
+    "nnoremap Ø O<Esc>0"_D
 
     " <A-k>
-    nnoremap ∆ <Plug>MoveLineUp
+    "nnoremap ∆ <Plug>MoveLineUp
     " <A-j>
-    nnoremap º <Plug>MoveLineDown
+    "nnoremap º <Plug>MoveLineDown
 
     " <A-h>
-    vnoremap ª <Plug>MoveBlockLeft
+    "vnoremap ª <Plug>MoveBlockLeft
     " <A-k>
-    vnoremap ∆ <Plug>MoveBlockUp
+    "vnoremap ∆ <Plug>MoveBlockUp
     " <A-j>
-    vnoremap º <Plug>MoveBlockDown
+    "vnoremap º <Plug>MoveBlockDown
     " <A-l>
-    vnoremap ¬ <Plug>MoveBlockRight
+    "vnoremap ¬ <Plug>MoveBlockRight
 else
     " FIXME: Update May 2023: Weird things going on with Gnome 44 and keymapping,
     " generating accentuated characters. It still not working exactly properly
@@ -173,26 +169,22 @@ else
 
     " Took me a while to figure out why my terminal wouldn't let me use the Alt key
     " I used 'sed -n l' to find out what char my terminal (tilix) was sending
-    execute "set <A-o>=o"
-"    execute "set <A-O>=O"
-    execute "set <A-s>=s"
-    execute "set <A-w>=w"
-    nmap <A-o> o<Esc>0"_D
-"    nmap <A-O> O<Esc>0"_D
-    nmap <A-s> :w<CR>
-    nmap <A-w> :bd<CR>
-    execute "set <A-h>=h"
-    execute "set <A-k>=k"
-    execute "set <A-j>=j"
-    execute "set <A-l>=l"
+    "execute "set <A-o>=o"
+    "execute "set <A-O>=O"
+    "nmap <A-o> o<Esc>0"_D
+    "nmap <A-O> O<Esc>0"_D
+    "execute "set <A-h>=h"
+    "execute "set <A-k>=k"
+    "execute "set <A-j>=j"
+    "execute "set <A-l>=l"
 
-    nmap <A-k> <Plug>MoveLineUp
-    nmap <A-j> <Plug>MoveLineDown
+    "nmap <A-k> <Plug>MoveLineUp
+    "nmap <A-j> <Plug>MoveLineDown
 
-    vmap <A-h> <Plug>MoveBlockLeft
-    vmap <A-l> <Plug>MoveBlockRight
-    vmap <A-k> <Plug>MoveBlockUp
-    vmap <A-j> <Plug>MoveBlockDown
+    "vmap <A-h> <Plug>MoveBlockLeft
+    "vmap <A-l> <Plug>MoveBlockRight
+    "vmap <A-k> <Plug>MoveBlockUp
+    "vmap <A-j> <Plug>MoveBlockDown
 
     execute "set <Home>=OH"
     execute "set <End>=OF"

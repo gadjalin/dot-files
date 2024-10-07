@@ -48,12 +48,26 @@ set -g tide_right_prompt_items cmd_duration jobs virtual_env time
 
 # Note: source-highlight is handled by decors/fish-source-highlight
 
+# --- macOS ---
+#set -gx PATH /opt/homebrew/opt/python/libexec/bin $PATH
+#set -gx PATH /opt/homebrew/opt/llvm/bin $PATH
+#
+#source /opt/std-python/bin/activate.fish
+
 # Activate autojump
-[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+#[ -f /opt/homebrew/share/autojump/autojump.fish ]; and source /opt/homebrew/share/autojump/autojump.fish
+
+# In case CMake requires more recent LLVM than Apple Clang
+#set -gx CC /opt/homebrew/opt/llvm/bin/clang
+#set -gx CXX /opt/homebrew/opt/llvm/bin/clang++
+#set -gx LD /opt/homebrew/opt/lld/bin/ld.lld
+#set -gx AR /opt/homebrew/opt/llvm/bin/llvm-ar
+#set -gx RANLIB /opt/homebrew/opt/llvm/bin/llvm-ranlib
+# -------------
 
 # Alias commands
-alias ll='exa -lrF --header --icons'
-alias la='exa -lrFa --header --icons'
-alias lt='exa -lFT -s type --header --icons'
+alias ll='eza -lF -s type --icons'
+alias la='eza -laF -s type --icons'
+alias lt='eza -lTF -s type --icons'
 alias myip='curl http://ipecho.net/plain; echo'
 
