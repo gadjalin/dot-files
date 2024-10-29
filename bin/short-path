@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Shorten file path to fit in tmux statusbar. The string is intended to be
+# piped to this string with the desired max length
+# e.g
+# path = "/home/me/path/to/somewhere_very_long"
+# => pwd | short-path 20 = "~/path/to/somewhere_..."
+
+sed "s#$HOME#~#g; s#\\([^/]*/[^/]*/\\).*\\(/[^/]*/.*\\)#\\1...\\2#" | perl -pe "s#(?<=^.{$1}).+#...#"
