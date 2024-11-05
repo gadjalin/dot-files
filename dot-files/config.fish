@@ -65,6 +65,17 @@ set -g tide_right_prompt_items cmd_duration jobs virtual_env time
 #set -gx RANLIB /opt/homebrew/opt/llvm/bin/llvm-ranlib
 # -------------
 
+# --- Linux ---
+#set -gx PATH $HOME/.local/bin $PATH
+#
+#begin
+#    set --local AUTOJUMP_PATH /usr/share/autojump/autojump.fish
+#    if test -e $AUTOJUMP_PATH
+#        source $AUTOJUMP_PATH
+#    end
+#end
+# -------------
+
 # Alias commands
 alias ll='eza -lF -s type --icons'
 alias la='eza -laF -s type --icons'
