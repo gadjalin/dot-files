@@ -1,8 +1,13 @@
-# My dot-files
+# dot-files
 
-## Usage
+&nbsp;&nbsp; *"The path towards simplicity often demands that you struggle with making things complicated first."*
 
-Simply `git clone` this repository and run `./install.sh`.
+---
+
+## How to Use
+
+Simply clone this repository with `git clone https://github.com/AarnoldGad/dot-files.git`
+and run `./install.sh` for a full setup.
 
 Note: *Don't execute* `export-preferences.fish`, it will be called by `install.sh` anyway.
 
@@ -23,18 +28,22 @@ There is not *that* much programs and plugins but it is easier to keep track and
 
 The following operations are performed:
 
-* Install common dependencies for [Fish](https://fishshell.com), [vim](https://www.vim.org), and [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), including:
-  * CMake, GCC/LLVM/build-essential, Go, OpenJDK, autojump, exa, fortune, cowsay, curl, nodejs, python3, npm
-* Install [Fish](https://fishshell.com) and [Fisher](https://github.com/jorgebucaran/fisher) (for plugins)
-* Install Tide and other plugins:
-  * None now
-* Export config.fish to ~/.config/fish/
-* Check vim version and enabled features
-* Install vim plugins
-* Export .vimrc to home directory
+- Install common dependencies for [Fish](https://fishshell.com), [vim](https://www.vim.org),
+and [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), plus a couple extras, including:
+  - CMake, GCC/LLVM/build-essential, Go, OpenJDK, autojump, exa, fortune, cowsay, curl, nodejs, python3, npm
+- Install [Fish](https://fishshell.com) and [Fisher](https://github.com/jorgebucaran/fisher) (for plugins)
+- Install [Tide](https://github.com/IlanCosman/tide) and other plugins:
+  - [decors/fish-source-highlight](https://github.com/decors/fish-source-highlight)
+- Export config.fish to ~/.config/fish/
+- Check vim version and enabled features
+- Install vim plugins
+- Export .vimrc to home directory
+- Additionally export tmux configuration (.tmux.conf) and alacritty
+(alacritty.toml)
 
 ## TODO
 
-* Automate installation of [custom font](https://github.com/romkatv/powerlevel10k-media)
-* Also [source-highlight](https://www.gnu.org/software/src-highlite)
-* Automate compilation of [YCM](https://github.com/ycm-core/YouCompleteMe)
+- Automate installation of [custom font](https://github.com/romkatv/powerlevel10k-media) (Currently recommend MesloLGS NF)
+- Also [source-highlight](https://www.gnu.org/software/src-highlite)
+- Automate compilation of [YCM](https://github.com/ycm-core/YouCompleteMe)
+
