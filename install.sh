@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # It looks like a mess to me, but it seems to work ¯\_(^^)_/¯
 
-dryrun=false
-packman="unknown"
+DRYRUN=false
+PACKMAN="unknown"
 
-if [[ $1 == 'dryrun' ]]; then
-    dryrun=true
+if [[ $1 == '--dryrun' ]]; then
+    DRYRUN=true
 fi
 
 function detect_packman()
@@ -15,7 +15,7 @@ function detect_packman()
         # If homebrew is installed
         if type brew &> /dev/null; then
             echo -n "Homebrew detected... "
-            packman="homebrew"
+            PACKMAN="homebrew"
         else
             echo "Homebrew is not installed and idk about MacPorts! Aborting."
             exit 1
@@ -23,22 +23,30 @@ function detect_packman()
     # if linux
     elif [[ $OSTYPE == "linux-gnu" ]]; then
         if [[ -f /etc/lsb-release ]]; then
-            # The regex do like: DISTRIB_ID="Whatever" -> Whatever
-            local distrib=$(cat /etc/lsb-release | grep DISTRIB_ID | sed -e 's/^[^=]*//' -e 's/^.//' -e 's/"//g')
-
-            if [[ $distrib == "Ubuntu" ]]; then
-                echo -n "APT detected... "
-                packman="apt"
-            elif [[ $distrib == "Arch" ]]; then
-                echo -n "Pacman detected... "
-                packman="pacman"
-            else
-                echo "Unsupported linux distribution! Aborting."
-                exit 1
-            fi
+            local RELEASE_FILE=/etc/lsb-release
+            local ID_KEY="DISTRIB_ID"
+        elif [[ -f /etc/os-release ]]; then
+            local RELEASE_FILE=/etc/os-release
+            local ID_KEY="ID"
         else
-            #TODO if /etc/lsb-release does not exist, do stuff with /etc/os-release or someth' ?
             echo "Unable to determine linux distribution! Aborting."
+            exit 1
+        fi
+
+        # The regex do like: DISTRIB_ID="Whatever" -> Whatever
+        local distrib=$(cat $RELEASE_FILE | grep -E "^$ID_KEY" | sed -e 's/^[^=]*//; s/^.//; s/"//g')
+
+        if [[ $distrib == "Ubuntu" ]]; then
+            echo -n "APT detected... "
+            PACKMAN="apt"
+        elif [[ $distrib == "Arch" ]]; then
+            echo -n "Pacman detected... "
+            PACKMAN="pacman"
+        elif [[ $distrib == "fedora" ]]; then
+            echo -n "DNF detected... "
+            PACKMAN="dnf"
+        else
+            echo "Unsupported linux distribution! Aborting."
             exit 1
         fi
     else
@@ -49,14 +57,16 @@ function detect_packman()
 
 function check_prerequisites()
 {
-    if [[ $packman == "homebrew" ]] && [[ $dryrun == false ]]; then
+    if [[ $PACKMAN == "homebrew" ]] && [[ $DRYRUN == false ]]; then
         brew install cmake autojump gcc exa fortune cowsay curl llvm node openjdk vim python || { echo "Errors occured during installation. Aborting."; exit 1; }
-    elif [[ $packman == "apt" ]] && [[ $dryrun == false ]]; then
+    elif [[ $PACKMAN == "apt" ]] && [[ $DRYRUN == false ]]; then
         # TODO: check autojump + vim >9.0 on ppa currently
         sudo apt update && sudo apt install build-essential cmake golang-go openjdk-17-jre openjdk-17-jdk exa fortune cowsay nodejs npm python3 python3-dev vim || { echo "Errors occured during installation. Aborting"; exit 1; }
-    elif [[ $packman == "pacman" ]] && [[ $dryrun == false ]]; then
+    elif [[ $PACKMAN == "pacman" ]] && [[ $DRYRUN == false ]]; then
         # TODO check autojump from the AUR
         sudo pacman -Sy base-devel cmake jre-openjdk jdk-openjdk go exa fortune-mod cowsay nodejs npm python vim || { echo "Errors occured during installation. Aborting"; exit 1; }
+    elif [[ $PACKMAN == "dnf" ]] && [[ $DRYRUN == false ]]; then
+        sudo dnf install @development-tools @development-libs gcc g++ gfortran cmake java-latest-openjdk java-latest-openjdk-devel golang eza fortune-mod cowsay nodejs nodejs-npm python3 python3-devel vim || { echo "Errors occured during installation. Aborting"; exit 1; }
     fi
 
     echo "Dependencies installed !"
@@ -64,34 +74,33 @@ function check_prerequisites()
 
 function install_fish()
 {
-    if [[ $packman == "homebrew" ]] && [[ $dryrun == false ]]; then
+    if [[ $PACKMAN == "homebrew" ]] && [[ $DRYRUN == false ]]; then
         brew install fish || { echo "Errors occured during installation. Aborting."; exit 1; }
-        FISH_PATH=/opt/homebrew/bin/fish
-    elif [[ $packman == "apt" ]] && [[ $dryrun == false ]]; then
+    elif [[ $PACKMAN == "apt" ]] && [[ $DRYRUN == false ]]; then
         sudo apt-add-repository ppa:fish-shell/release-3 && sudo apt update && sudo apt install fish || { echo "Errors occured during installation. Aborting."; exit 1; }
-
-        if [[ -f /usr/local/bin/fish ]]; then
-            FISH_PATH=/usr/local/bin/fish
-        else
-            FISH_PATH=/usr/bin/fish
-        fi
-    elif [[ $packman == "pacman" ]] && [[ $dryrun == false ]]; then
+    elif [[ $PACKMAN == "pacman" ]] && [[ $DRYRUN == false ]]; then
         sudo pacman -Sy fish || { echo "Errors occured during installation. Aborting."; exit 1; }
-
-        if [[ -f /usr/local/bin/fish ]]; then
-            FISH_PATH=/usr/local/bin/fish
-        else
-            FISH_PATH=/usr/bin/fish
-        fi
+    elif [[ $PACKMAN == "dnf" ]] && [[ $DRYRUN == false ]]; then
+        sudo dnf install fish || { echo "Errors occured during installation. Aborting."; exit 1; }
     else
         echo "Package manager missing! Aborting."
         exit 1
     fi
 
+    if [[ $PACKMAN == "homebrew" ]]; then
+        FISH_PATH=/opt/homebrew/bin/fish
+    elif [[ $PACKMAN == "apt" ]] || [[ $PACKMAN == "pacman" ]] || [[ $PACKMAN == "dnf" ]]; then
+        if [[ -f /usr/local/bin/fish ]]; then
+            FISH_PATH=/usr/local/bin/fish
+        else
+            FISH_PATH=/usr/bin/fish
+        fi
+    fi
+
     echo "Fish installed !"
 
     # Update default shell
-    if [[ $dryrun == false ]]; then
+    if [[ $DRYRUN == false ]]; then
         if [[ -f $FISH_PATH ]] && [[ -x $FISH_PATH ]]; then
             echo $FISH_PATH | sudo tee -a /etc/shells
             chsh -s $FISH_PATH
@@ -111,9 +120,13 @@ function check_fish()
         echo "Fish is already installed ! Proceeding with exportation..."
     fi
 
-    if [[ $dryrun == false ]]; then
+    if [[ $DRYRUN == false ]]; then
         ./export-preferences.fish
+    else
+        ./export-preferences.fish --dryrun
     fi
+
+    echo "Installation script has ended."
 }
 
 detect_packman
