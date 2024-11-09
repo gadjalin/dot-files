@@ -94,6 +94,7 @@ function export_fishrc
     end
 
     echo "Exported."
+    echo "Note that some configurations may be platform specific. Please check in ~/.config/fish/config.fish."
 end
 
 # Did you mean: emacs
@@ -167,6 +168,7 @@ function export_vimrc
     end
 
     echo "Exported."
+    echo "Note that some configurations may be platform specific. Please check in ~/.vimrc"
 end
 
 function configure_vim
