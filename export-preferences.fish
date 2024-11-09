@@ -196,6 +196,7 @@ function export_terminal
     end
 
     echo "Exported."
+    echo "TODO: Automate installation of Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)"
 end
 
 greet_me
