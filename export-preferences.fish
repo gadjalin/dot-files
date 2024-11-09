@@ -71,7 +71,7 @@ function check_fish_plugins
         echo -n "Tide is not installed. Installing now... "
 
         if [ $dryrun = false ]
-            fisher install IlanCosman/tide@v5
+            fisher install IlanCosman/tide@v6
         end
     end
 
@@ -141,6 +141,7 @@ function check_vim_plugins
         echo -n "Vundle was not detected. Installing now... "
 
         if [ $dryrun = false ]
+            mkdir -p $HOME/.vim/bundle
             git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
         end
     end
@@ -158,7 +159,7 @@ function check_vim_plugins
 end
 
 function export_vimrc
-    echo -n "Exporting VIM dot-files... "
+    echo -n "Exporting VIM dot files... "
 
     if [ $dryrun = false ]
         cp {./dot-files,$HOME}/.vimrc
@@ -181,6 +182,20 @@ function configure_vim
     echo "/!\ Remember to build YCM with 'cd ~/.vim/bundle/YouCompleteMe && python3 install.py --all'"
 end
 
+function export_terminal
+    echo -n "Exporting alacritty and tmux dot files... "
+
+    if [ $dryrun = false ]
+        mkdir -p $HOME/.config/alacritty/themes
+        cp {./dot-files,$HOME/.config/alacritty}/alacritty.toml
+        cp {./dot-files,$HOME/.config/alacritty/themes}/gruvbox_dark.toml
+
+        cp {./dot-files,$HOME}/.tmux.conf
+    end
+
+    echo "Exported."
+end
+
 greet_me
 
 check_font
@@ -193,6 +208,7 @@ check_vim_features
 check_vim_plugins
 export_vimrc
 configure_vim
+export_terminal
 
 goodbye_me
 
