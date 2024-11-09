@@ -5,7 +5,7 @@
 # Found it !
 set -g dryrun false
 
-if [ "$argv[1]" = "dryrun" ]
+if [ "$argv[1]" = "--dryrun" ]
     set -g dryrun true
 end
 
@@ -41,8 +41,8 @@ end
 
 # Real shit starts here...
 function check_font
-    echo "Remember to install recommended font at https://github.com/romkatv/powerlevel10k-media/"
- 
+    echo "Remember to install recommended font at https://github.com/romkatv/powerlevel10k-media/ (MesloLGS NF)"
+
     if [ $dryrun = false ]
         # TODO: Find a way to automate font installation
         echo "TODO: Find a way to automate font installation"
@@ -121,6 +121,11 @@ function check_vim_features
     # For Yggdroot/indentLine
     if [ ! (vim --version | grep +conceal) ]
         echo "VIM is missing a feature: conceal! Aborting."
+        exit 1
+    end
+
+    if [ ! (vim --version | grep +python3) ]
+        echo "VIM needs to be compiled with python3 support! Aborting."
         exit 1
     end
 
