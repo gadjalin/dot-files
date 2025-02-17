@@ -3,51 +3,95 @@ scriptencoding utf-8
 
 set nocompatible
 
+let g:mapleader=","
+
 " Plugins
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
 
-    " Display
-    Plugin 'khaveesh/vim-fish-syntax'
+    " --- Display ---
+    " Powerline
+    Plugin 'itchyny/lightline.vim'
+    Plugin 'itchyny/vim-gitbranch'
+    " Shows indentation levels
     Plugin 'Yggdroot/indentLine'
 
-    " Behaviour
+    " --- Behaviour --- 
     Bundle 'matze/vim-move'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'tpope/vim-surround'
-    Plugin 'https://github.com/ctrlpvim/ctrlp.vim'
+    " Alignment operator
+    Plugin 'tommcdo/vim-lion'
+    " Fuzzy finder
+    Plugin 'ctrlpvim/ctrlp.vim'
 
-    " Completion and Debug
+    " --- Syntax --- 
+    Plugin 'khaveesh/vim-fish-syntax'
+    Plugin 'sheerun/vim-polyglot'
+
+    " --- Completion and Debug ---
     Plugin 'ycm-core/YouCompleteMe'
+    "Plugin 'prabirshrestha/vim-lsp'
+    " Integrated debugger
     Plugin 'puremourning/vimspector'
 
+    " --- Colorschemes ---
     Plugin 'morhetz/gruvbox'
 
-    " Load as very last one
+    " --- Load as very last one ---
     Plugin 'ryanoasis/vim-devicons'
 call vundle#end()
 
+" Plugins/lightline
+let g:lightline = {
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'readonly', 'filename', 'gitbranch' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'filetype' ],
+            \              [ 'fileformat' ] ]
+            \ },
+            \ 'component_function': {
+            \   'filename': 'LightlineFilename',
+            \   'gitbranch': 'gitbranch#name',
+            \ },
+            \ 'component': {
+            \   'lineinfo': '%(%l/%L,%c%)',
+            \ },
+            \ }
+
+function! LightlineFilename()
+    let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    let modified = &modified ? ' +' : ''
+    return filename . modified
+endfunction
+
 " Plugins/YCM
-let g:ycm_always_populate_location_list = 1
+let g:ycm_always_populate_location_list = 1 " See list of errors in location list (:lopen :lclose)
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] }
-let g:ycm_clangd_args = ['--header-insertion=never']
-let g:ycm_confirm_extra_conf = 0
-"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] } " Vimspector integration
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-" --- macOS ---
-"let g:ycm_language_server = []
-"let g:ycm_language_server =
-"    \ [
-"    \   { 'name': 'fortls',
-"    \     'cmdline': [ 'fortls', '--hover_language', 'fortran95', '--notify_init', '--hover_signature', '--use_signature_help', '--lowercase_intrinsics' ],
-"    \     'filetypes': [ 'fortran' ]
-"    \   },
-"    \ ]
-" -------------
+" YCM Clang/Server settings
+let g:ycm_clangd_binary_path = '/opt/homebrew/opt/llvm/bin/clangd'
+let g:ycm_clangd_args = [ '--header-insertion=never', '--query-driver=/usr/bin/gcc' ]
+let g:ycm_confirm_extra_conf = 0
+
+let g:ycm_language_server = []
+let g:ycm_language_server =
+    \ [
+    \   { 'name': 'fortls',
+    \     'cmdline': [ 'fortls', '--hover_language', 'fortran95', '--notify_init', '--hover_signature', '--use_signature_help', '--lowercase_intrinsics' ],
+    \     'filetypes': [ 'fortran' ]
+    \   },
+    \ ]
+nnoremap <leader>yfw <Plug>(YCMFindSymbolInWorkspace)
+nnoremap <leader>yfd <Plug>(YCMFindSymbolInDocument)
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
 
 " Plugins/vim-cpp-modern (Installed separately from Vundle)
 let g:cpp_function_highlight = 1
@@ -62,12 +106,41 @@ let g:ctrlp_show_hidden = 1
 let g:gruvbox_italic='1'
 let g:gruvbox_transparent_bg='1'
 
+" Display
+set background=dark
+set termguicolors
+set t_Co=256
+colorscheme gruvbox
+
+" Position
+set number
+set relativenumber
+set numberwidth=3
+set ruler
+
+set showmode
+set showcmd
+set colorcolumn=100,132 " 132 is Fortran limit
+set cursorline
+
+" Other displays
+set list
+set listchars=tab:→\ ,space:·,eol:¬
+set cmdheight=1
+set shortmess=a
+set signcolumn=yes
+
+" Status line
+set laststatus=2
+"set statusline=\ %<%f\ %y%m%r%=%(%l/%L,%c%)
+
 " Indentation
 set sw=4 sts=4 ts=4 expandtab
 set nosmartindent
 set cindent noautoindent
 set cinoptions=l1,g0
 
+" Cursor
 set backspace=indent,eol,start
 set whichwrap+=h,l
 set completeopt=menu,preview
@@ -76,13 +149,14 @@ set clipboard=
 " Search
 set hlsearch
 set incsearch
-set smartcase ignorecase
+set smartcase
+set ignorecase
 
 " Window
 set splitbelow splitright
 set termwinsize=12x0
 
-" Makes terminal not appear in the buffer list
+" Make terminal not appear in the buffer list
 " So that I don't have to worry when I cycle through buffers
 autocmd TerminalWinOpen *
     \ if &buftype == 'terminal' |
@@ -103,26 +177,6 @@ set nojoinspaces
 set wildmenu
 set wildmode=list:longest
 
-" Display
-set relativenumber
-set numberwidth=3
-set ruler
-set showmode
-set showcmd
-set colorcolumn=100
-set laststatus=2
-
-set list
-set listchars=tab:→\ ,space:·,eol:¬
-
-set shortmess=a
-set statusline=\ %<%f\ %y%m%r%=%(%l/%L,%c%)
-
-set background=dark
-set termguicolors
-set t_Co=256
-colorscheme gruvbox
-
 " Terminal title set to file name
 set title
 set titlestring=%t
@@ -136,6 +190,7 @@ syntax on
 filetype on
 filetype indent on
 filetype plugin on
+filetype plugin indent on
 
 " Must come after filetype
 set tw=79
@@ -144,6 +199,14 @@ set fo=crlj
 " Shortcuts
 nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
+
+nmap S :w<CR>
+nmap Q :q<CR>
+
+"map sl :set splitright<CR>:vsplit<CR>
+"map sh :set nosplitright<CR>:vsplit<CR>
+"map sj :set splitbelow<CR>:split<CR>
+"map sk :set nosplitbelow<CR>:split<CR>
 
 if has('macunix')
     " <A-o>
