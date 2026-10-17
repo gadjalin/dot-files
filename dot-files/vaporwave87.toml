@@ -1,0 +1,48 @@
+# Vaporwave '87
+# Toned-down, bluer take on Synthwave '84, inspired by fluoromachine.nvim
+# (retrowave) with a deep purple background. Shared with
+# ~/.config/fish/tide_themes/vaporwave87.fish and ~/.vim/colors/vaporwave87.vim.
+
+[colors.primary]
+foreground = "#dcdcf5"
+background = "#200933"
+
+[colors.cursor]
+text = "#200933"
+cursor = "#4fd6e8"
+
+[colors.vi_mode_cursor]
+text = "#200933"
+cursor = "#f2cc4a"
+
+[colors.selection]
+text = "CellForeground"
+background = "#3b2560"
+
+[colors.search.matches]
+foreground = "#200933"
+background = "#a974f5"
+
+[colors.search.focused_match]
+foreground = "#200933"
+background = "#f2cc4a"
+
+[colors.normal]
+black = "#2c1545"
+red = "#f0506e"
+green = "#6fe0b0"
+yellow = "#f2cc4a"
+blue = "#6c8cff"
+magenta = "#d65bd8"
+cyan = "#4fd6e8"
+white = "#dcdcf5"
+
+[colors.bright]
+black = "#7a6aa0"
+red = "#ff7a92"
+green = "#93f0c8"
+yellow = "#ffe07a"
+blue = "#94acff"
+magenta = "#e98ae8"
+cyan = "#85e6f2"
+white = "#ffffff"

@@ -34,12 +34,13 @@ and [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), plus a couple ex
 - Install [Fish](https://fishshell.com) and [Fisher](https://github.com/jorgebucaran/fisher) (for plugins)
 - Install [Tide](https://github.com/IlanCosman/tide) and other plugins:
   - [decors/fish-source-highlight](https://github.com/decors/fish-source-highlight)
-- Export config.fish to ~/.config/fish/
+- Export config.fish and the tide color themes (tide_themes/) to ~/.config/fish/
+  - Specific tide colorschmes can be picked using `prompt_theme` in config.fish
+  - Secrets (e.g. API tokens) are read from ~/.config/fish/secrets.fish
 - Check vim version and enabled features
 - Install vim plugins
-- Export .vimrc to home directory
-- Additionally export tmux configuration (.tmux.conf) and alacritty
-(alacritty.toml)
+- Export .vimrc to home directory, and custom plugins/colorschemes to ~/.vim
+- Additionally export tmux configuration (.tmux.conf) and alacritty (alacritty.toml and tide_themes)
 
 ## TODO
 

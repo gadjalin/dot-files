@@ -46,7 +46,6 @@ call vundle#end()
 
 " Plugins/lightline
 let g:lightline = {
-            \ 'colorscheme': 'wombat',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'readonly', 'filename', 'gitbranch' ] ],
@@ -73,12 +72,15 @@ endfunction
 let g:ycm_always_populate_location_list = 1 " See list of errors in location list (:lopen :lclose)
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_semantic_triggers = { 'VimspectorPrompt': [ '.', '->', ':', '<' ] } " Vimspector integration
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_semantic_triggers = {
+    \ 'VimspectorPrompt': [ '.', '->', ':', '<' ],
+    \ 'c,cpp,fortran': [ 're!\w{3}', '_' ],
+    \ }
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " YCM Clang/Server settings
-let g:ycm_clangd_binary_path = '/opt/homebrew/opt/llvm/bin/clangd'
-let g:ycm_clangd_args = [ '--header-insertion=never', '--query-driver=/usr/bin/gcc' ]
+"let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+let g:ycm_clangd_args = [ '--header-insertion=never']", '--query-driver=/usr/bin/gcc' ]
 let g:ycm_confirm_extra_conf = 0
 
 let g:ycm_language_server = []
@@ -102,15 +104,36 @@ let g:cpp_member_highlight = 1
 " Plugins/CtrlP
 let g:ctrlp_show_hidden = 1
 
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](bin|build|\.git|\.cache)$',
+  \ 'file': '\v\.(o|a|mod|so|dll|png|jpg|DS_Store)$',
+  \ }
+
 " Plugins/gruvbox
 let g:gruvbox_italic='1'
-let g:gruvbox_transparent_bg='1'
+let g:gruvbox_bold='1'
+let g:gruvbox_transparent_bg='0'
+
+" Colorscheme: vaporwave87, vhswave87 or neonwave87 (also sets lightline and indentLine colors)
+let s:theme = 'vaporwave87'
+
+let g:vaporwave87_transparent=0
+let g:vaporwave87_bold=1
+let g:vaporwave87_italic=1
+
+let g:vhswave87_transparent=0
+
+let g:neonwave87_transparent=0
+let g:neonwave87_glow=1
+let g:neonwave87_italic=1
 
 " Display
 set background=dark
 set termguicolors
-set t_Co=256
-colorscheme gruvbox
+set term=xterm-256color
+"set t_Co=256
+execute 'colorscheme' s:theme
+let g:lightline.colorscheme = s:theme
 
 " Position
 set number
@@ -143,7 +166,7 @@ set cinoptions=l1,g0
 " Cursor
 set backspace=indent,eol,start
 set whichwrap+=h,l
-set completeopt=menu,preview
+set completeopt=menu,preview,popup
 set clipboard=
 
 " Search
@@ -191,6 +214,10 @@ filetype on
 filetype indent on
 filetype plugin on
 filetype plugin indent on
+
+au BufRead,BufNewFile *inlist* set filetype=fortran
+au BufRead,BufNewFile *.inc set filetype=fortran
+au BufRead,BufNewFile *.dek set filetype=fortran
 
 " Must come after filetype
 set tw=79

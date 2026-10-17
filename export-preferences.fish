@@ -90,10 +90,13 @@ function export_fishrc
     echo -n "Exporting fish configuration... "
 
     if [ $dryrun = false ]
+        mkdir -p $HOME/.config/fish/tide_themes
         cp {./dot-files,$HOME/.config/fish}/config.fish
+        cp ./dot-files/tide_themes/*.fish $HOME/.config/fish/tide_themes/
     end
 
     echo "Exported."
+    echo "Remember to create ~/.config/fish/secrets.fish with 'chmod 600'."
     echo "Note that some configurations may be platform specific. Please check in ~/.config/fish/config.fish."
 end
 
@@ -165,6 +168,9 @@ function export_vimrc
     if [ $dryrun = false ]
         cp {./dot-files,$HOME}/.vimrc
         cp {./dot-files,$HOME/.vim}/init.vim
+        mkdir -p $HOME/.vim/colors $HOME/.vim/autoload/lightline/colorscheme
+        cp ./dot-files/vim/colors/*.vim $HOME/.vim/colors/
+        cp ./dot-files/vim/autoload/lightline/colorscheme/*.vim $HOME/.vim/autoload/lightline/colorscheme/
     end
 
     echo "Exported."
@@ -189,8 +195,11 @@ function export_terminal
 
     if [ $dryrun = false ]
         mkdir -p $HOME/.config/alacritty/themes
-        cp {./dot-files,$HOME/.config/alacritty}/alacritty.toml
+        sed "s|@HOME@|$HOME|" ./dot-files/alacritty.toml > $HOME/.config/alacritty/alacritty.toml
         cp {./dot-files,$HOME/.config/alacritty/themes}/gruvbox_dark.toml
+        cp {./dot-files,$HOME/.config/alacritty/themes}/vaporwave87.toml
+        cp {./dot-files,$HOME/.config/alacritty/themes}/vhswave87.toml
+        cp {./dot-files,$HOME/.config/alacritty/themes}/neonwave87.toml
 
         cp {./dot-files,$HOME}/.tmux.conf
     end

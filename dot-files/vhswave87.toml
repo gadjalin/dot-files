@@ -1,0 +1,49 @@
+# VHS '87
+# Bluer sibling of vaporwave87: fluoromachine.nvim retrowave background with
+# more blue and purple. neonwave87 keeps the original sampled colors.
+# Shared with ~/.config/fish/tide_themes/vhswave87.fish and
+# ~/.vim/colors/vhswave87.vim.
+
+[colors.primary]
+foreground = "#f8f8f8"
+background = "#262335"
+
+[colors.cursor]
+text = "#262335"
+cursor = "#61e2ff"
+
+[colors.vi_mode_cursor]
+text = "#262335"
+cursor = "#af6df9"
+
+[colors.selection]
+text = "CellForeground"
+background = "#4d3a99"
+
+[colors.search.matches]
+foreground = "#241b2f"
+background = "#af6df9"
+
+[colors.search.focused_match]
+foreground = "#241b2f"
+background = "#61e2ff"
+
+[colors.normal]
+black = "#241b2f"
+red = "#fe4450"
+green = "#72f1b8"
+yellow = "#ffcc00"
+blue = "#6f9cff"
+magenta = "#e865f2"
+cyan = "#61e2ff"
+white = "#f8f8f8"
+
+[colors.bright]
+black = "#6d78b8"
+red = "#ff6f78"
+green = "#95f5ca"
+yellow = "#ffd94d"
+blue = "#8ab4f8"
+magenta = "#c08cf5"
+cyan = "#8ae9ff"
+white = "#ffffff"
