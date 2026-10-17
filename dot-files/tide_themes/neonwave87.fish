@@ -1,6 +1,4 @@
-# Tide colors: Neon '87
-# Hex values shared with ~/.config/alacritty/themes/neonwave87.toml and
-# ~/.vim/colors/neonwave87.vim (fluoromachine retrowave palette).
+# Tide colors: Neon Wave '87
 #
 #   green  72F1B8   yellow FFCC00   pink    FF7EDB   purple AF6DF9
 #   cyan   61E2FF   orange FF8B39   red     FE4450   text   F8F8F8

@@ -1,6 +1,4 @@
-# Tide colors: Vaporwave '87
-# Hex values shared with ~/.config/alacritty/themes/vaporwave87.toml and
-# ~/.vim/colors/vaporwave87.vim.
+# Tide colors: Vapor Wave '87
 #
 #   purple  A974F5   blue   6C8CFF   lavender 8FB0EC   cyan  4FD6E8
 #   magenta D65BD8   yellow F2CC4A   mint     6FE0B0   red   F0506E

@@ -1,5 +1,5 @@
 # Tide colors: gruvbox (dark)
-# Uses named ANSI colors, so it relies on a gruvbox terminal palette.
+# ANSI colors
 
 set -g tide_context_color_default brgreen
 
