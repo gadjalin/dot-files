@@ -40,7 +40,12 @@ and [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), plus a couple ex
 - Check vim version and enabled features
 - Install vim plugins
 - Export .vimrc to home directory, and custom plugins/colorschemes to ~/.vim
-- Additionally export tmux configuration (.tmux.conf) and alacritty (alacritty.toml and tide_themes)
+- Additionally export tmux (.tmux.conf and themes/) to ~/ and ~/.tmux/, and alacritty (alacritty.toml and themes/) to ~/.config/alacritty/
+
+## Colorschemes
+
+Each tool picks its colors from its themes directory: `prompt_theme` in config.fish,
+`s:theme` in .vimrc, `@theme` in .tmux.conf and `general.import` in alacritty.toml.
 
 ## TODO
 

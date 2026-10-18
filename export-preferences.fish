@@ -90,9 +90,7 @@ function export_fishrc
     echo -n "Exporting fish configuration... "
 
     if [ $dryrun = false ]
-        mkdir -p $HOME/.config/fish/tide_themes
-        cp {./dot-files,$HOME/.config/fish}/config.fish
-        cp ./dot-files/tide_themes/*.fish $HOME/.config/fish/tide_themes/
+        cp -R ./fish/config.fish ./fish/tide_themes $HOME/.config/fish/
     end
 
     echo "Exported."
@@ -166,11 +164,8 @@ function export_vimrc
     echo -n "Exporting VIM dot files... "
 
     if [ $dryrun = false ]
-        cp {./dot-files,$HOME}/.vimrc
-        cp {./dot-files,$HOME/.vim}/init.vim
-        mkdir -p $HOME/.vim/colors $HOME/.vim/autoload/lightline/colorscheme
-        cp ./dot-files/vim/colors/*.vim $HOME/.vim/colors/
-        cp ./dot-files/vim/autoload/lightline/colorscheme/*.vim $HOME/.vim/autoload/lightline/colorscheme/
+        cp ./vim/.vimrc $HOME/
+        cp -R ./vim/init.vim ./vim/.ycm_extra_conf.py ./vim/colors ./vim/autoload $HOME/.vim/
     end
 
     echo "Exported."
@@ -191,17 +186,17 @@ function configure_vim
 end
 
 function export_terminal
-    echo -n "Exporting alacritty and tmux dot files... "
+    echo -n "Exporting alacritty, tmux and helper scripts... "
 
     if [ $dryrun = false ]
-        mkdir -p $HOME/.config/alacritty/themes
-        sed "s|@HOME@|$HOME|" ./dot-files/alacritty.toml > $HOME/.config/alacritty/alacritty.toml
-        cp {./dot-files,$HOME/.config/alacritty/themes}/gruvbox_dark.toml
-        cp {./dot-files,$HOME/.config/alacritty/themes}/vaporwave87.toml
-        cp {./dot-files,$HOME/.config/alacritty/themes}/vhswave87.toml
-        cp {./dot-files,$HOME/.config/alacritty/themes}/neonwave87.toml
+        mkdir -p $HOME/.config/alacritty $HOME/.tmux $HOME/.local/bin
+        sed "s|@HOME@|$HOME|" ./alacritty/alacritty.toml > $HOME/.config/alacritty/alacritty.toml
+        cp -R ./alacritty/themes $HOME/.config/alacritty/
 
-        cp {./dot-files,$HOME}/.tmux.conf
+        cp ./tmux/.tmux.conf $HOME/
+        cp -R ./tmux/themes $HOME/.tmux/
+
+        cp ./bin/* $HOME/.local/bin/
     end
 
     echo "Exported."

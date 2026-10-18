@@ -1,0 +1,8 @@
+#! /bin/bash
+
+DATE_BEGIN=$(date -d 'TZ="Europe/Paris" 1 Oct 2024 00:00' +%s)
+TODAY=$(date -d 'TZ="Europe/Paris" now 00:00' +%s)
+
+GAD_PHD_DAYS=$(( (TODAY - DATE_BEGIN + 43200) / 86400 + 1))
+echo $GAD_PHD_DAYS
+
