@@ -1,12 +1,8 @@
 " Name:        vhswave87
-" Description: VHS '87, the bluer sibling of vaporwave87. Background and base
-"              colors from the retrowave variant of fluoromachine.nvim, with
-"              more blue, purple and magenta, and less red and yellow. All
-"              regular fonts except macros (bold). Matched to the alacritty
-"              theme in
-"              ~/.config/alacritty/themes/vhswave87.toml.
-"              neonwave87 keeps the original sampled version with glow.
-" Requires:    termguicolors (or GUI Vim)
+" Description: VHS Wave '87
+"              Based on the retrowave variant of fluoromachine.nvim and the
+"              BinaryState visual vibe.
+" Requires:    termguicolors
 "
 " Options (set before :colorscheme):
 "   g:vhswave87_transparent  1 to keep the terminal background (default 0)

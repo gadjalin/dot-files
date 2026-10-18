@@ -1,8 +1,4 @@
-# VHS '87
-# Bluer sibling of vaporwave87: fluoromachine.nvim retrowave background with
-# more blue and purple. neonwave87 keeps the original sampled colors.
-# Shared with ~/.config/fish/tide_themes/vhswave87.fish and
-# ~/.vim/colors/vhswave87.vim.
+# VHS Wave '87
 
 [colors.primary]
 foreground = "#f8f8f8"
@@ -47,3 +43,4 @@ blue = "#8ab4f8"
 magenta = "#c08cf5"
 cyan = "#8ae9ff"
 white = "#ffffff"
+

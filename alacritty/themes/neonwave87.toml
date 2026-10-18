@@ -1,8 +1,4 @@
-# Neon '87
-# Bluer sibling of vaporwave87, sampled from the retrowave variant of
-# fluoromachine.nvim. Shared with ~/.config/fish/tide_themes/neonwave87.fish
-# and ~/.vim/colors/neonwave87.vim.
-# The palette has no blue: ANSI blue is its purple, magenta its pink.
+# Neon Wave '87
 
 [colors.primary]
 foreground = "#f8f8f8"
@@ -47,3 +43,4 @@ blue = "#c494fb"
 magenta = "#ffa1e5"
 cyan = "#8ae9ff"
 white = "#ffffff"
+

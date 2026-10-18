@@ -73,3 +73,4 @@ alias la='eza -laF -s type --icons always'
 alias lt='eza -lTF -s type --icons always'
 alias myip='curl http://ipecho.net/plain; echo'
 alias pssh='ps -ef | grep ssh'
+

@@ -1,6 +1,4 @@
-" Lightline colors for VHS '87, matching ~/.vim/colors/vhswave87.vim
-" Layout from fluoromachine's retrowave lualine theme: mode in its color with
-" the same color at half brightness as text.
+" Lightline colors for VHS Wave '87
 
 let s:bg_dark = ['#241b2f', 234]
 let s:bg      = ['#262335', 235]
@@ -43,3 +41,4 @@ let s:p.tabline.middle = [ [s:fg, s:bg_dark] ]
 let s:p.tabline.right  = [ [s:cyan_d, s:cyan] ]
 
 let g:lightline#colorscheme#vhswave87#palette = lightline#colorscheme#flatten(s:p)
+

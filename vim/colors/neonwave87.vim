@@ -1,9 +1,7 @@
 " Name:        neonwave87
-" Description: Neon '87, the bluer sibling of vaporwave87. Colors sampled from
-"              the retrowave variant of fluoromachine.nvim (the middle window
-"              of its README screenshot). Matched to the alacritty theme in
-"              ~/.config/alacritty/themes/neonwave87.toml.
-" Requires:    termguicolors (or GUI Vim)
+" Description: Neon Wave '87.
+"              Based on the retrowave variant of fluoromachine.nvim
+" Requires:    termguicolors
 "
 " Options (set before :colorscheme):
 "   g:neonwave87_transparent  1 to keep the terminal background (default 0)

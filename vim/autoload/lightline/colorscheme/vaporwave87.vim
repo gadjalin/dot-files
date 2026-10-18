@@ -1,4 +1,4 @@
-" Lightline colors for Vaporwave '87, matching ~/.vim/colors/vaporwave87.vim
+" Lightline colors for Vaporwave '87
 
 let s:bg_dark = ['#1c082d', 233]
 let s:bg      = ['#200933', 234]
@@ -38,3 +38,4 @@ let s:p.tabline.middle = [ [s:dimmed, s:bg_dark] ]
 let s:p.tabline.right  = [ [s:bg, s:purple] ]
 
 let g:lightline#colorscheme#vaporwave87#palette = lightline#colorscheme#flatten(s:p)
+

@@ -1,8 +1,7 @@
 " Name:        vaporwave87
-" Description: Vaporwave '87, a toned-down, bluer Synthwave '84 inspired by
-"              fluoromachine.nvim. Matched to the alacritty theme in
-"              ~/.config/alacritty/themes/vaporwave87.toml.
-" Requires:    termguicolors (or GUI Vim)
+" Description: Vaporwave '87
+"              Based on Synthwave '84 and fluoromachine.nvim.
+" Requires:    termguicolors
 "
 " Options (set before :colorscheme):
 "   g:vaporwave87_transparent  1 to keep the terminal background (default 0)

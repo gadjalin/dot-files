@@ -33,3 +33,4 @@ set -g tide_virtual_env_color AF6DF9
 
 set -g tide_prompt_color_separator_same_color 463465
 set -g tide_prompt_color_frame_and_connection 463465
+

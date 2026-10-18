@@ -1,4 +1,4 @@
-# Tide colors: Vapor Wave '87
+# Tide colors: Vaporwave '87
 #
 #   purple  A974F5   blue   6C8CFF   lavender 8FB0EC   cyan  4FD6E8
 #   magenta D65BD8   yellow F2CC4A   mint     6FE0B0   red   F0506E
@@ -33,3 +33,4 @@ set -g tide_virtual_env_color 6C8CFF
 
 set -g tide_prompt_color_separator_same_color 4A3D6E
 set -g tide_prompt_color_frame_and_connection 4A3D6E
+

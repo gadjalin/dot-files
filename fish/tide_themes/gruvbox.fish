@@ -1,5 +1,4 @@
 # Tide colors: gruvbox (dark)
-# ANSI colors
 
 set -g tide_context_color_default brgreen
 
@@ -31,3 +30,4 @@ set -g tide_time_color cyan
 set -g tide_jobs_color green
 
 set -g tide_virtual_env_color brgreen
+
