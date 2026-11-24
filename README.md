@@ -41,6 +41,7 @@ and [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe), plus a couple ex
 - Install vim plugins
 - Export .vimrc to home directory, and custom plugins/colorschemes to ~/.vim
 - Additionally export tmux (.tmux.conf and themes/) to ~/ and ~/.tmux/, and alacritty (alacritty.toml and themes/) to ~/.config/alacritty/
+- Export the Claude Code configuration (claude/) to ~/.claude/
 
 ## Colorschemes
 

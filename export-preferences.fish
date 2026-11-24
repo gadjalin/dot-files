@@ -203,6 +203,26 @@ function export_terminal
     echo "TODO: Automate installation of Tmux Plugin Manager (https://github.com/tmux-plugins/tpm)"
 end
 
+function export_claude
+    echo -n "Exporting Claude Code configuration... "
+
+    if [ $dryrun = false ]
+        mkdir -p $HOME/.claude
+        cp ./claude/CLAUDE.md ./claude/settings.json ./claude/statusline-command.sh $HOME/.claude/
+
+        # MCP servers live in ~/.claude.json, which also holds account data, so
+        # they are re-added here. The token comes from ~/.config/fish/secrets.fish.
+        claude mcp remove --scope user mcp-ads-arxiv &> /dev/null
+        claude mcp add --scope user mcp-ads-arxiv \
+            -e "ADS_API_TOKEN=$ADS_API_TOKEN" \
+            -e "LIT_CACHE_DIR=$HOME/.local/share/literature" \
+            -- mcp-ads-arxiv > /dev/null
+    end
+
+    echo "Exported."
+    echo "The status line needs jq, and the ADS MCP server needs mcp-ads-arxiv on the PATH."
+end
+
 greet_me
 
 check_font
@@ -216,6 +236,7 @@ check_vim_plugins
 export_vimrc
 configure_vim
 export_terminal
+export_claude
 
 goodbye_me
 
